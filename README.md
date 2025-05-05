@@ -28,6 +28,10 @@ The plugin will automatically:
 - Open images in Obsidian when clicked
 - Create the folder if it doesn’t already exist
 
+<img width="268" alt="Screenshot 2025-05-05 at 20 43 33" src="https://github.com/user-attachments/assets/7c62e94a-f97e-4955-9264-8c9364c39378" />
+
+<img width="560" alt="Screenshot 2025-05-05 at 20 44 19" src="https://github.com/user-attachments/assets/a97bfe30-0b81-4c55-a000-5524f987f912" />
+
 ---
 
 ## ⚙️ Options
@@ -49,6 +53,9 @@ If your note is `2025-04-29.md`, and you have images in:
 Journal_Photos/2025-04-29/
 ```
 They will be rendered in a clean, clickable grid.
+
+<img width="557" alt="Screenshot 2025-05-05 at 20 43 46" src="https://github.com/user-attachments/assets/511b29e4-f129-4335-85f0-e3bce36dc766" />
+
 
 ---
 
