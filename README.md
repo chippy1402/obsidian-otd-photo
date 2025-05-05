@@ -66,6 +66,7 @@ They will be rendered in a clean, clickable grid.
 - Use it for habit tracking, visual memory, travel journals, etc.
 - Things to do,
 - Add more Gallery Options
+- Look at making this Ios compliant at the moment not compatable with mobiles!
 
 ---
 
