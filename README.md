@@ -57,6 +57,8 @@ They will be rendered in a clean, clickable grid.
 - Use Hazel or Lightroom to export photos into `Journal_Photos/YYYY-MM-DD` automatically
 - Combine with Templater to insert the block dynamically (not required)
 - Use it for habit tracking, visual memory, travel journals, etc.
+- Things to do,
+- Add more Gallery Options
 
 ---
 
