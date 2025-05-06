@@ -28,8 +28,21 @@ export default class OTDPhotoPlugin extends Plugin {
         if (folder && folder instanceof TFolder) {
           const children = folder.children.filter(f => f instanceof TFile && f.extension.match(/jpg|jpeg|png|gif/i));
           for (const file of children) {
-            const p = el.createEl("p");
-            p.innerText = `![[${folderPath}/${file.name}]]`;
+            const img = el.createEl("img");
+            if (file instanceof TFile) {
+              img.src = this.app.vault.getResourcePath(file);
+            } else {
+              console.warn(`Skipping non-TFile item: ${file.name}`);
+            }
+            img.alt = file.name || "Photo";
+            img.style.width = "100%";
+            img.style.borderRadius = "8px";
+            img.style.marginBottom = "10px";
+            img.setAttribute("loading", "lazy"); // Lazy loading for better performance
+            img.onerror = () => {
+              img.src = "path/to/placeholder-image.png"; // Replace with your placeholder image
+              img.alt = "Image not available";
+            };
           }
         } else {
           el.createEl("p", { text: `No folder found for path: ${folderPath}` });
@@ -99,9 +112,14 @@ export default class OTDPhotoPlugin extends Plugin {
 
             const img = link.createEl("img");
             img.src = (this as Plugin).app.vault.getResourcePath(file);
-            img.alt = file.name;
+            img.alt = file.name || "Photo";
             img.style.width = "100%";
             img.style.borderRadius = "8px";
+            img.setAttribute("loading", "lazy"); // Lazy loading for better performance
+            img.onerror = () => {
+              img.src = "path/to/placeholder-image.png"; // Replace with your placeholder image
+              img.alt = "Image not available";
+            };
           } else {
             console.warn(`Skipping non-file item: ${file.name}`);
           }

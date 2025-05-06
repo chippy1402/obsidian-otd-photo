@@ -63,7 +63,7 @@ var OTDPhotoPlugin = /** @class */ (function (_super) {
             var _this = this;
             return __generator(this, function (_a) {
                 this.registerMarkdownCodeBlockProcessor("OTD-Photo", function (source, el, ctx) { return __awaiter(_this, void 0, void 0, function () {
-                    var lines, config, _i, lines_1, line, _a, key, value, useFileName, fallback, base, today, datePath, folderPath_1, folder_1, children, _b, children_1, file, p, fileName, match, folderPath, style, columns, folder, err_1, imageFiles, gallery, _loop_1, this_1, _c, imageFiles_1, file;
+                    var lines, config, _i, lines_1, line, _a, key, value, useFileName, fallback, base, today, datePath, folderPath_1, folder_1, children, _loop_1, this_1, _b, children_1, file, fileName, match, folderPath, style, columns, folder, err_1, imageFiles, gallery, _loop_2, this_2, _c, imageFiles_1, file;
                     var _this = this;
                     return __generator(this, function (_d) {
                         switch (_d.label) {
@@ -88,10 +88,28 @@ var OTDPhotoPlugin = /** @class */ (function (_super) {
                                     folder_1 = this.app.vault.getAbstractFileByPath(folderPath_1);
                                     if (folder_1 && folder_1 instanceof obsidian_1.TFolder) {
                                         children = folder_1.children.filter(function (f) { return f instanceof obsidian_1.TFile && f.extension.match(/jpg|jpeg|png|gif/i); });
+                                        _loop_1 = function (file) {
+                                            var img = el.createEl("img");
+                                            if (file instanceof obsidian_1.TFile) {
+                                                img.src = this_1.app.vault.getResourcePath(file);
+                                            }
+                                            else {
+                                                console.warn("Skipping non-TFile item: ".concat(file.name));
+                                            }
+                                            img.alt = file.name || "Photo";
+                                            img.style.width = "100%";
+                                            img.style.borderRadius = "8px";
+                                            img.style.marginBottom = "10px";
+                                            img.setAttribute("loading", "lazy"); // Lazy loading for better performance
+                                            img.onerror = function () {
+                                                img.src = "path/to/placeholder-image.png"; // Replace with your placeholder image
+                                                img.alt = "Image not available";
+                                            };
+                                        };
+                                        this_1 = this;
                                         for (_b = 0, children_1 = children; _b < children_1.length; _b++) {
                                             file = children_1[_b];
-                                            p = el.createEl("p");
-                                            p.innerText = "![[".concat(folderPath_1, "/").concat(file.name, "]]");
+                                            _loop_1(file);
                                         }
                                     }
                                     else {
@@ -143,7 +161,7 @@ var OTDPhotoPlugin = /** @class */ (function (_super) {
                                     gallery.style.display = "grid";
                                     gallery.style.gridTemplateColumns = "repeat(".concat(columns, ", 1fr)");
                                     gallery.style.gap = "10px";
-                                    _loop_1 = function (file) {
+                                    _loop_2 = function (file) {
                                         if (file instanceof obsidian_1.TFile) {
                                             var link = gallery.createEl("a", {
                                                 href: "#"
@@ -152,20 +170,25 @@ var OTDPhotoPlugin = /** @class */ (function (_super) {
                                                 e.preventDefault();
                                                 _this.app.workspace.getLeaf().openFile(file);
                                             };
-                                            var img = link.createEl("img");
-                                            img.src = this_1.app.vault.getResourcePath(file);
-                                            img.alt = file.name;
-                                            img.style.width = "100%";
-                                            img.style.borderRadius = "8px";
+                                            var img_1 = link.createEl("img");
+                                            img_1.src = this_2.app.vault.getResourcePath(file);
+                                            img_1.alt = file.name || "Photo";
+                                            img_1.style.width = "100%";
+                                            img_1.style.borderRadius = "8px";
+                                            img_1.setAttribute("loading", "lazy"); // Lazy loading for better performance
+                                            img_1.onerror = function () {
+                                                img_1.src = "path/to/placeholder-image.png"; // Replace with your placeholder image
+                                                img_1.alt = "Image not available";
+                                            };
                                         }
                                         else {
                                             console.warn("Skipping non-file item: ".concat(file.name));
                                         }
                                     };
-                                    this_1 = this;
+                                    this_2 = this;
                                     for (_c = 0, imageFiles_1 = imageFiles; _c < imageFiles_1.length; _c++) {
                                         file = imageFiles_1[_c];
-                                        _loop_1(file);
+                                        _loop_2(file);
                                     }
                                 }
                                 else {
