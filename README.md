@@ -64,9 +64,9 @@ They will be rendered in a clean, clickable grid.
 - Use Hazel or Lightroom to export photos into `Journal_Photos/YYYY-MM-DD` automatically
 - Combine with Templater to insert the block dynamically (not required)
 - Use it for habit tracking, visual memory, travel journals, etc.
+- Added mobile Photos, It will now embed the Photos on that day in the current Note by Date with fall back.
 - Things to do,
 - Add more Gallery Options
-- Look at making this Ios compliant at the moment not compatable with mobiles!
 
 ---
 

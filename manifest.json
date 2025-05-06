@@ -1,7 +1,7 @@
 {
   "id": "otd-photo-plugin",
   "name": "OTD Photo Gallery",
-  "version": "1.0.3",
+  "version": "1.2.0",
   "minAppVersion": "0.15.0",
   "description": "Render image galleries for daily notes using simple OTD-Photo blocks.",
   "author": "chippy1402",
