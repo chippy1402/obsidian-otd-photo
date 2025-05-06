@@ -21,10 +21,26 @@ export default class OTDPhotoPlugin extends Plugin {
 
       let datePath = config.path;
 
+      // Mobile-safe rendering: simple vertical list of images
+      if (/Mobi|Android/i.test(navigator.userAgent)) {
+        const folderPath = base + '/' + (datePath || today);
+        const folder = this.app.vault.getAbstractFileByPath(folderPath);
+        if (folder && folder instanceof TFolder) {
+          const children = folder.children.filter(f => f instanceof TFile && f.extension.match(/jpg|jpeg|png|gif/i));
+          for (const file of children) {
+            const p = el.createEl("p");
+            p.innerText = `![[${folderPath}/${file.name}]]`;
+          }
+        } else {
+          el.createEl("p", { text: `No folder found for path: ${folderPath}` });
+        }
+        return;
+      }
+
       if (!datePath && useFileName) {
         const fileName = ctx.sourcePath.split("/").pop() || "";
         const match = fileName.match(/\d{4}-\d{2}-\d{2}/);
-        datePath = match?.[0];
+        datePath = match?.[0] || "";
 
         console.log("OTD-Photo config:", config);
         console.log("ctx.sourcePath:", ctx.sourcePath);

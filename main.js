@@ -63,10 +63,10 @@ var OTDPhotoPlugin = /** @class */ (function (_super) {
             var _this = this;
             return __generator(this, function (_a) {
                 this.registerMarkdownCodeBlockProcessor("OTD-Photo", function (source, el, ctx) { return __awaiter(_this, void 0, void 0, function () {
-                    var lines, config, _i, lines_1, line, _a, key, value, useFileName, fallback, base, today, datePath, fileName, match, folderPath, style, columns, folder, err_1, imageFiles, gallery, _loop_1, this_1, _b, imageFiles_1, file;
+                    var lines, config, _i, lines_1, line, _a, key, value, useFileName, fallback, base, today, datePath, folderPath_1, folder_1, children, _b, children_1, file, p, fileName, match, folderPath, style, columns, folder, err_1, imageFiles, gallery, _loop_1, this_1, _c, imageFiles_1, file;
                     var _this = this;
-                    return __generator(this, function (_c) {
-                        switch (_c.label) {
+                    return __generator(this, function (_d) {
+                        switch (_d.label) {
                             case 0:
                                 lines = source.split(/\r?\n/);
                                 config = {};
@@ -82,10 +82,27 @@ var OTDPhotoPlugin = /** @class */ (function (_super) {
                                 base = config.basepath || "Journal_Photos";
                                 today = window.moment().format("YYYY-MM-DD");
                                 datePath = config.path;
+                                // Mobile-safe rendering: simple vertical list of images
+                                if (/Mobi|Android/i.test(navigator.userAgent)) {
+                                    folderPath_1 = base + '/' + (datePath || today);
+                                    folder_1 = this.app.vault.getAbstractFileByPath(folderPath_1);
+                                    if (folder_1 && folder_1 instanceof obsidian_1.TFolder) {
+                                        children = folder_1.children.filter(function (f) { return f instanceof obsidian_1.TFile && f.extension.match(/jpg|jpeg|png|gif/i); });
+                                        for (_b = 0, children_1 = children; _b < children_1.length; _b++) {
+                                            file = children_1[_b];
+                                            p = el.createEl("p");
+                                            p.innerText = "![[".concat(folderPath_1, "/").concat(file.name, "]]");
+                                        }
+                                    }
+                                    else {
+                                        el.createEl("p", { text: "No folder found for path: ".concat(folderPath_1) });
+                                    }
+                                    return [2 /*return*/];
+                                }
                                 if (!datePath && useFileName) {
                                     fileName = ctx.sourcePath.split("/").pop() || "";
                                     match = fileName.match(/\d{4}-\d{2}-\d{2}/);
-                                    datePath = match === null || match === void 0 ? void 0 : match[0];
+                                    datePath = (match === null || match === void 0 ? void 0 : match[0]) || "";
                                     console.log("OTD-Photo config:", config);
                                     console.log("ctx.sourcePath:", ctx.sourcePath);
                                     console.log("File name extracted:", fileName);
@@ -102,15 +119,15 @@ var OTDPhotoPlugin = /** @class */ (function (_super) {
                                 console.log("Final folder path:", folderPath);
                                 folder = this.app.vault.getAbstractFileByPath(folderPath);
                                 if (!!folder) return [3 /*break*/, 4];
-                                _c.label = 1;
+                                _d.label = 1;
                             case 1:
-                                _c.trys.push([1, 3, , 4]);
+                                _d.trys.push([1, 3, , 4]);
                                 return [4 /*yield*/, this.app.vault.createFolder(folderPath)];
                             case 2:
-                                _c.sent();
+                                _d.sent();
                                 return [3 /*break*/, 4];
                             case 3:
-                                err_1 = _c.sent();
+                                err_1 = _d.sent();
                                 el.createEl("p", { text: "\u26A0\uFE0F Error creating folder: ".concat(folderPath) });
                                 return [2 /*return*/];
                             case 4:
@@ -146,8 +163,8 @@ var OTDPhotoPlugin = /** @class */ (function (_super) {
                                         }
                                     };
                                     this_1 = this;
-                                    for (_b = 0, imageFiles_1 = imageFiles; _b < imageFiles_1.length; _b++) {
-                                        file = imageFiles_1[_b];
+                                    for (_c = 0, imageFiles_1 = imageFiles; _c < imageFiles_1.length; _c++) {
+                                        file = imageFiles_1[_c];
                                         _loop_1(file);
                                     }
                                 }
