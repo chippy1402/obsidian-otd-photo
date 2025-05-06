@@ -1,5 +1,5 @@
 {
-  "name": "otd-photo-plugin",
+  "name": "otd-photo-gallery",
   "version": "1.2.0",
   "main": "index.js",
   "scripts": {
