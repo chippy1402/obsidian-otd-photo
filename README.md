@@ -12,6 +12,7 @@ Insert this code block into your note:
 
 ````markdown
 ```OTD-Photo
+basepath="MyPhotos"
 usefilename=true
 fallbacktotoday=true
 columns=3
@@ -67,6 +68,7 @@ They will be rendered in a clean, clickable grid.
 - Added mobile Photos, It will now embed the Photos on that day in the current Note by Date with fall back.
 - Things to do,
 - Add more Gallery Options
+- I might add this to Obsidian Community Plugins some day!
 
 ---
 
