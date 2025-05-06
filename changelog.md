@@ -1,6 +1,6 @@
 ### Changelog
 
-**Version [Suggested Version, e.g., 1.2.0]**
+**Version 1.2.0**
 
 * **Added Mobile Compatibility:** The plugin now fully supports mobile devices (using `Platform.isMobileApp`) providing a dedicated rendering method optimized for smaller screens. This integrates functionality previously available in the separate LensLoop plugin.
 * **Improved Mobile Rendering:** Photos on mobile are now rendered using Obsidian's standard Markdown embed syntax (`![[image path]]`) via `MarkdownRenderer`, ensuring better compatibility and handling on mobile platforms.
