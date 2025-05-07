@@ -1,6 +1,6 @@
 {
   "name": "otd-photo-gallery",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "main": "index.js",
   "scripts": {
     "build": "esbuild main.ts --bundle --outfile=main.js --platform=node --format=cjs --external:obsidian"
